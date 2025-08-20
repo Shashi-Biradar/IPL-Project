@@ -1,17 +1,15 @@
-# 🏏IPL Management System with Authentication (Python + MySQL + SQLAlchemy ORM)
+# 🏏IPL Management System (Django + MySQL)
 
-A Python-based IPL Management System with user authentication (Signup/Login) using MySQL database and SQLAlchemy ORM.
-This project allows authenticated users to perform CRUD (Create, Read, Update, Delete) operations on IPL teams and players.
-With ORM, all database operations are written in a Pythonic, object-oriented way, avoiding raw SQL queries.
+A Django-based web application for managing IPL teams and players with user authentication.
+The project allows users to sign up, log in, and perform CRUD (Create, Read, Update, Delete) operations on IPL records.
+Data is stored in a MySQL database, and Django’s ORM is used for database interaction.
 
 🚀 Features
 🔐 Authentication
 
-User Signup with username & password
+User Signup/Login/Logout (Django auth system)
 
-Secure Login with hashed passwords
-
-Each user has their own records
+Each user manages their own records securely
 
 🏏 IPL CRUD Operations
 
@@ -25,15 +23,17 @@ Each user has their own records
 
 🔎 Search – Find players by name, team, or role
 
-📊 ORM Advantages
+🌐 Web Features
 
-Uses SQLAlchemy ORM (object-oriented DB handling)
+Django templates for frontend
 
-Easy migration between databases (SQLite → MySQL → PostgreSQL)
+Django ORM for database interaction
 
-Clean models for User, Team, Player
+Admin panel for managing all records
 
 🛠️ Tech Stack
+
+Framework: Django 5 (or 4.x if you’re using older)
 
 Language: Python 3
 
@@ -41,16 +41,19 @@ Database: MySQL
 
 Libraries:
 
-SQLAlchemy → ORM
+mysqlclient or pymysql → MySQL connector
 
-pymysql → MySQL connector for Python
-
-SQLite Viewer → Pretty table output
-
-hashlib → Password hashing
+Django built-in packages for auth, forms, ORM
 
 📂 Project Structure
-ipl-orm-mysql-project/
-│── models.py           # SQLAlchemy models (User, Team, Player)
-│── ipl_manager.py      # Main program file (Authentication + CRUD logic)
-│── README.md           # Project documentation
+ipl-django-crud/
+│── ipl_project/           # Main Django project folder
+│   ├── settings.py        # Project settings (configure MySQL here)
+│   ├── urls.py            # Root URL config
+│── ipl_app/               # Django app for IPL management
+│   ├── models.py          # Team & Player models
+│   ├── views.py           # Business logic (CRUD + auth)
+│   ├── urls.py            # App URL routing
+│   ├── templates/         # HTML templates
+│── manage.py              # Django project manager
+│── README.md              # Documentation
