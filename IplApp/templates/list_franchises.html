@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8">
+    <title>IPL Teams Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            padding: 40px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            border: 1px solid black;
+            overflow: hidden;
+         
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+            border: 1px solid black;
+
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        td {
+            color: #333;
+            border: 1px solid black;
+            border-radius: 8px;
+        }
+        #create{
+            
+            display: flex;
+            justify-content: flex-end;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        #anker{
+            background-color: rgb(236, 172, 10);
+            padding: 12px;
+            border-radius: 8px;
+            color: black;
+            text-decoration: none;
+        }
+        #edit{
+            color: green;
+            cursor: pointer;
+            font-size: large;
+           
+            
+
+        }
+        #dlt{
+            border: none;
+            color: red;
+            cursor: pointer;
+              font-size: large;
+        }
+        #btn{
+            border: none;
+            background-color: transparent;
+           
+            
+        }
+    
+    </style>
+</head>
+
+<body>
+
+    <h2>IPL Franchise Teams</h2>
+
+    <!-- {{ franchises }} -->
+    <!-- 
+    {% for franchise in franchises %}
+        {% if franchise.id == 1 %}
+           <p>{{ franchise.id }} {{ franchise.name }}</p>
+        {% elif franchise.id == 2 %}
+           <p>{{ franchise.id }} - This is ID 2</p>
+        {% else %}
+           <p>{{ franchise.id }}</p>
+        {% endif %}
+    {% endfor %} -->
+
+<div id="create">
+    <a href="{% url 'list_stadiums' %}" id="anker" style="margin-right: 10px; background-color: brown; color: white;">List Stadiums</a>
+    <a href="{% url 'create_franchise' %}" id="anker">Create Franchise</a>
+</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Team Name</th>
+                <th>Short Name</th>
+                <th>Owner</th>
+                <th>Coach Name</th>
+                <th>City</th>
+                <th>Founded Year</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for franchise in franchises %}
+
+                <tr>
+                    <td>
+                        <a href="{% url 'franchise_details' franchise.id %}">{{franchise.name}}</a>
+                    </td>
+                    <td>{{franchise.short_name}}</td>
+                    <td>{{franchise.owner}}</td>
+                    <td>{{franchise.coach_name}}</td>
+                    <td>{{franchise.city}}</td>
+                    <td>{{franchise.founded_year}}</td>
+                    <td>
+                         
+                        <a href="{% url 'update_franchise' franchise.id %}"><i class="fa-solid fa-pen-to-square" id="edit"></i></a>
+                        
+                        <form method="POST" action="{% url 'delete_franchise' franchise.id%}" style="display: inline;">
+                            {%csrf_token%}
+                            <button id="btn" type="submit" onclick="return confirm('Are you sure you want to delete this franchise')">
+                                 <i class="fa-solid fa-trash" id="dlt"></i>
+                            </button>
+                            
+                       
+                        </form>
+                        <a href="{% url 'list_players' franchise.id%}" >View Players</a>
+                    
+                     
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+</body>
+
+</html>

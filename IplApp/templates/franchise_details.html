@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Franchise Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .card {
+            max-width: 400px;
+            margin: auto;
+            background-color: rgb(200, 233, 233);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            padding-left: 50px;
+        }
+
+        .card h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .card .detail {
+            margin-bottom: 10px;
+        }
+
+        .card .detail span {
+            font-weight: bold;
+            display: inline-block;
+            width: 140px;
+        }
+        #create-franchise-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+        #create-franchise {
+            padding-bottom: 5px;
+            color: blue;
+            font-size: 18px;
+        }
+        #img{
+            width: 180px;
+            height: 160px;
+            margin-left: 90px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="create-franchise-container">
+        <a href="{% url 'list_franchise' %}" id="create-franchise">List Franchise</a>
+    </div>
+    <div class="card">
+        <h2 style="text-decoration: underline; color: rgb(50, 19, 227); padding-right: 30px;">Franchise Details</h2>
+        <div class="detail">
+            {% if franchise.logo %}
+                <img src="{{franchise.logo.url}}" id="img"/>
+            {% else %}
+                <p>No Logo</p>
+            {% endif %}
+        </div>
+        <hr style="font-size: xx-large;">
+        <div class="detail">
+            <span>Name:</span> {{ franchise.name }}
+        </div>
+        <div class="detail">
+            <span>Short name:</span> {{ franchise.short_name }}
+        </div>
+        <div class="detail">
+            <span>Owner:</span> {{ franchise.owner }}
+        </div>
+        <div class="detail">
+            <span>Coach name:</span> {{ franchise.coach_name }}
+        </div>
+        <div class="detail">
+            <span>City:</span> {{ franchise.city }}
+        </div>
+        <div class="detail">
+            <span>Founded year:</span> {{ franchise.founded_year }}
+        </div>
+    </div>
+
+</body>
+
+</html>

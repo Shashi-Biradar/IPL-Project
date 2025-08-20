@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Add franchise</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f9;
+
+      padding: 10px;
+    }
+
+    .form-container {
+      max-width: 400px;
+      background-color: #fff;
+      padding: 5px 20px;
+      margin: auto;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    label {
+      font-weight: 500;
+      margin-top: 10px;
+
+      margin-bottom: 5px;
+      display: block;
+      color: #34495e;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 95%;
+      padding: 10px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #f9f9f9;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus {
+      border-color: #007BFF;
+      background-color: #fff;
+      outline: none;
+    }
+
+    button {
+      margin-top: 15px;
+      margin-bottom: 5px;
+      padding: 12px;
+      width: 100%;
+      background-color: #007BFF;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+     #create{
+            
+            display: flex;
+            justify-content:center;
+            font-size: 10px;
+            margin-bottom: 5px;
+        }
+
+    #anker {
+      background-color: rgb(236, 172, 10);
+      padding: 8px;
+      width: 200px;
+      text-align: center;
+      border-radius: 5px;
+      font-size: large;
+      color: black;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-container">
+    <h2>Update Franchise</h2>
+    <form method="POST" enctype="multipart/form-data">
+      {%csrf_token%}
+   
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" value="{{franchise.name}}">
+
+      <label for="shortname">Short name:</label>
+      <input type="text" id="shortname" name="short_name" value="{{franchise.short_name}}">
+
+      <label for="owner">Owner:</label>
+      <input type="text" id="owner" name="owner" value="{{franchise.owner}}">
+
+      <label for="coach">Coach name:</label>
+      <input type="text" id="coach" name="coach_name" value="{{franchise.coach_name}}">
+
+      <label for="city">City:</label>
+      <input type="text" id="city" name="city" value="{{franchise.city}}">
+
+      <label for="year">Founded year:</label>
+      <input type="number" id="year" name="founded_year" value="{{franchise.founded_year}}">
+
+       <label for="logo">Logo :</label>
+       {% if franchise.logo%}
+          <img src="{{ franchise.logo.url}}" alt="" width="140px" >
+       {% endif %}
+
+      <input type="file" id="logo" name="logo" value="{{franchise.logo}}">
+
+      <button type="submit">Save</button>
+      <div id="create">
+        <a href="{% url 'list_franchise' %}" id="anker">List Franchise</a>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
